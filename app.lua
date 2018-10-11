@@ -6,8 +6,12 @@ local CompactUnitFrame
 
 function addon:OnInitialize()
 
-    hooksecurefunc('DefaultCompactUnitFrameSetup', function (f)
-        NIORO_VARS.COMPACT_UNIT_FRAME = f
+    hooksecurefunc('CompactUnitFrame_SetUnit', function (f, unit)
+        if unit == nil then return end
+        if not UnitInParty('player') and not IsInRaid() then 
+            NIORO_VARS.COMPACT_FRAME = {}
+        end
+        NIORO_VARS.COMPACT_FRAME[unit] = f
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
             f.healthBar:SetStatusBarTexture(infos.HEALTH_BAR_TEXTURE, 'BORDER')
         end
