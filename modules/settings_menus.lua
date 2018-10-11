@@ -131,18 +131,6 @@ function Menus:getMenus()
 end
 
 function Menus:OnInitialize()
-    local dialogs = {
-        text = L.MIORO_RELOAD_CONFIRM,
-        button1 = OKAY,
-        button2 = NO,
-        hideOnEscape = true,
-        timeout = 0,
-        exclusive = true,
-        showAlert = true,
-        OnAccept = function(self) end,
-        OnCancel = function(self) end,
-    }
-
     StaticPopupDialogs['MIORO_RELOAD_CONFIRM'] = {
         text = L.MIORO_RELOAD_CONFIRM,
         button1 = OKAY,
