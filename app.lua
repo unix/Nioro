@@ -43,6 +43,12 @@ function addon:OnInitialize()
         end
     end)
 
+    hooksecurefunc('CompactUnitFrame_UpdateName', function (f)
+        if not NIORO_DB.SETTINGS.USE_SHORT_NAME then return end
+        if not f.name or not f.name:IsShown() then return end
+        f.name:SetText(UnitFullName(f.unit))
+    end)
+
 end
 
 function addon:OnEnable()

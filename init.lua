@@ -16,6 +16,7 @@ function Init:DB()
             DEBUFF_SCALE = 1,
             USE_FLAT_TEXTURE = true,
             USE_FLAT_ICON = true,
+            USE_SHORT_NAME = true,
             OPTIONS = {
                 displayName = true,
                 displayRoleIcon = true,

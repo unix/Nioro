@@ -82,10 +82,23 @@ local menus = {
                     StaticPopup_Show('MIORO_RELOAD_CONFIRM')
                 end,
             },
+            baseShortName = {
+                name = L.SETTINGS_BASE_SHORT_NAME,
+                type = 'toggle',
+                width = 'full',
+                order = 7,
+                tristate = true,
+                get = function ()
+                    return Utils:toboolean(NIORO_DB.SETTINGS.USE_SHORT_NAME)
+                end,
+                set = function (info, t)
+                    Actions:toggleShortName(Utils:toboolean(t))
+                end,
+            },
             baseSep1 = {
                 name = '\n',
                 type = 'description',
-                order = 7,
+                order = 10,
             },
             baseBuff = {
                 name = L.SETTINGS_BASE_FLAT_BUFF,
@@ -94,7 +107,7 @@ local menus = {
                 min = 0.5,
                 max = 3,
                 step = 0.2,
-                order = 8,
+                order = 11,
                 set = function (info, value)
                     Actions:setBuffScale(value)
                 end,
@@ -105,7 +118,7 @@ local menus = {
             baseSep2 = {
                 name = '\n',
                 type = 'description',
-                order = 9,
+                order = 12,
             },
             baseDebuff = {
                 name = L.SETTINGS_BASE_FLAT_DEBUFF,
@@ -114,7 +127,7 @@ local menus = {
                 min = 0.5,
                 max = 3,
                 step = 0.2,
-                order = 10,
+                order = 13,
                 set = function (info, value)
                     Actions:setDebuffScale(value)
                 end,

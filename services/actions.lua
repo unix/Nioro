@@ -67,6 +67,11 @@ function Actions:toggleFlatIcon(toggle)
     self:updateFrameOptions()
 end
 
+function Actions:toggleShortName(toggle)
+    NIORO_DB.SETTINGS.USE_SHORT_NAME = toggle
+    self:updateFrameOptions()
+end
+
 function Actions:setBuffScale(scale)
     NIORO_DB.SETTINGS.BUFF_SCALE = scale
     self:updateFrameOptions()
@@ -76,8 +81,6 @@ function Actions:setDebuffScale(scale)
     NIORO_DB.SETTINGS.DEBUFF_SCALE = scale
     self:updateFrameOptions()
 end
-
-
 
 
 
