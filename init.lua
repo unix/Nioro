@@ -5,6 +5,7 @@ function Init:vars()
     if not NIORO_VARS then NIORO_VARS = {} end
     if not _G then _G = {} end
     NIORO_VARS.COMPACT_UNIT_FRAME = false
+    NIORO_VARS.COMPACT_FRAME = {}
 end
 
 function Init:DB()

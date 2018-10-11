@@ -12,3 +12,13 @@ function Utils:setState(obj, key, value)
     return next
 end
 
+function Utils:tableLength(t)
+    if not t then return 0 end
+    local count = 0
+    for _, _ in pairs(t) do 
+        count = count + 1
+    end
+    return count
+end
+
+

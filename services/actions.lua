@@ -32,23 +32,19 @@ function Actions:initSlash()
     end
 end
 
-function Actions:getFrame()
-    if not NIORO_VARS.COMPACT_UNIT_FRAME then
+function Actions:updateFrameOptions(options)
+    if Utils:tableLength(NIORO_VARS.COMPACT_FRAME) == 0 then
         return self:log(L.NOT_FOUND_RAID_FRAME)
     end
-    return NIORO_VARS.COMPACT_UNIT_FRAME
-end
-
-function Actions:updateFrameOptions(options)
-    local f = self:getFrame()
     if not options then options = DefaultCompactUnitFrameOptions end
 
     for k, v in pairs(NIORO_DB.SETTINGS.OPTIONS) do
         options = Utils:setState(options, k, v)
     end
-
-    CompactUnitFrame_SetOptionTable(f, options)
-    CompactUnitFrame_UpdateAll(f)
+    for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
+        CompactUnitFrame_SetOptionTable(frame, options)
+        CompactUnitFrame_UpdateAll(frame)
+    end
 end
 
 function Actions:toggleRoleIcon(toggle)
@@ -68,18 +64,17 @@ end
 
 function Actions:toggleFlatIcon(toggle)
     NIORO_DB.SETTINGS.USE_FLAT_ICON = toggle
-    CompactUnitFrame_UpdateBuffs(self:getFrame())
-    CompactUnitFrame_UpdateDebuffs(self:getFrame())
+    self:updateFrameOptions()
 end
 
 function Actions:setBuffScale(scale)
     NIORO_DB.SETTINGS.BUFF_SCALE = scale
-    CompactUnitFrame_UpdateBuffs(self:getFrame())
+    self:updateFrameOptions()
 end
 
 function Actions:setDebuffScale(scale)
     NIORO_DB.SETTINGS.DEBUFF_SCALE = scale
-    CompactUnitFrame_UpdateDebuffs(self:getFrame())
+    self:updateFrameOptions()
 end
 
 
