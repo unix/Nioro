@@ -8,7 +8,7 @@ Blizzard Raid frame enhancement. includes Big Buff / Flat style / hidden icon...
 
 
 #### Download
-1. download addon in [curseforge](https://wow.curseforge.com/projects/dungeonwatchdog/files).
+1. download addon in [curseforge](https://wow.curseforge.com/projects/nioro/files).
 2. unzip and move addon folder to 'World of Warcraft\Interface\AddOns'
 3. restart World of Warcraft.
 
