@@ -7,7 +7,7 @@ local Utils = addon:GetModule('Utils')
 
 local menus = {
     info = {
-        name = 'Nioro 能帮助你详细设定暴雪原生框架界面。使用前请先在 界面 > 团队界面配置 中勾选使用。',
+        name = L.SETTINGS_INFO_DESC,
         type = 'description',
         order = 1,
     },

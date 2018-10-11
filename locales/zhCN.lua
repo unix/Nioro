@@ -15,3 +15,5 @@ L['SETTINGS_BASE_FLAT_ICON'] = '扁平化显示生命值\n'
 L['SETTINGS_BASE_FLAT_BUFF'] = 'Buff 大小调整'
 L['SETTINGS_BASE_FLAT_DEBUFF'] = 'Debuff 大小调整'
 L['MIORO_RELOAD_CONFIRM'] = '[Nioro]: 改动此设置项需要重新加载 UI 界面，你确定吗 ?'
+L['SETTINGS_INFO_DESC'] = 'Nioro 能帮助你详细设定暴雪原生框架界面。使用前请确认团队框架已勾选使用。'
+

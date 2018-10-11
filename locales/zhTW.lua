@@ -15,4 +15,4 @@ L['SETTINGS_BASE_FLAT_ICON'] = '扁平化顯示圖標\n'
 L['SETTINGS_BASE_FLAT_BUFF'] = 'Buff 大小調整'
 L['SETTINGS_BASE_FLAT_DEBUFF'] = 'Debuff 大小調整'
 L['MIORO_RELOAD_CONFIRM'] = '[Nioro]: 改動此項設置必須要重新加載 UI 界面，你確定這樣做嗎 ?'
-
+L['SETTINGS_INFO_DESC'] = 'Nioro 能幫助你詳細設定暴雪原生框架界面，使用前請先確認團隊框架已勾選使用。'
