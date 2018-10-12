@@ -21,4 +21,10 @@ function Utils:tableLength(t)
     return count
 end
 
-
+-- when val is nil, don't make any changes, this may be the caller's failure.
+-- when return true, caller hook will be skip.
+function Utils:isDefaultSetting(key, val)
+    if val == nil then return true end
+    if NIORO_DB.DEFAULT_SETTINGS[key] == nil then return true end
+    return NIORO_DB.DEFAULT_SETTINGS[key] == val
+end

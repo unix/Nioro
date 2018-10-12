@@ -3,6 +3,7 @@ local AceConfig, AceConfigDialog, AceGUI  = LibStub('AceConfig-3.0'), LibStub('A
 local Settings = addon:NewModule('Settings')
 local Menus = addon:GetModule('SettingsMenus')
 local Resize = addon:GetModule('SettingsResize')
+local Font = addon:GetModule('SettingsFont')
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
 local options = {
@@ -15,6 +16,10 @@ for k, v in pairs(Menus:get()) do
 end
 
 for k, v in pairs(Resize:get()) do
+    options.args[k] = v
+end
+
+for k, v in pairs(Font:get()) do
     options.args[k] = v
 end
 

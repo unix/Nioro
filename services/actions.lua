@@ -81,7 +81,6 @@ function Actions:toggleShortPerc(toggle)
     self:updateFrameOptions()
 end
 
-
 function Actions:setBuffScale(scale)
     NIORO_DB.SETTINGS.BUFF_SCALE = scale
     self:updateFrameOptions()
@@ -98,6 +97,20 @@ function Actions:setFrameScale(scale)
 
     for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
         frame:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
+    end
+end
+
+function Actions:setFontStatusScale(scale)
+    NIORO_DB.SETTINGS.FONT_STATUS_SCALE = scale
+    self:updateFrameOptions()
+end
+
+function Actions:setFontNameScale(scale)
+    NIORO_DB.SETTINGS.FONT_NAME_SCALE = scale
+    if not self:isEnableFrame() then return end
+
+    for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
+        CompactUnitFrame_UpdateName(frame)
     end
 end
 
