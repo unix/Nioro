@@ -3,7 +3,7 @@
 ## Title-zhCN: Nioro
 ## Notes: Blizzard Raid frame enhancement
 ## Notes-zhCN: 暴雪团队框架订制与增强
-## Version: 0.4.1
+## Version: 0.4.2
 ## SavedVariables: NIORO_VARS
 ## SavedVariablesPerCharacter: NIORO_DB
 ## LoadManagers: AddonLoader
