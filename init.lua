@@ -21,6 +21,7 @@ function Init:DB()
             USE_FLAT_TEXTURE = true,
             USE_FLAT_ICON = true,
             USE_SHORT_NAME = true,
+            USE_SHORT_PERC = false,
             OPTIONS = {
                 displayName = true,
                 displayRoleIcon = true,

@@ -54,6 +54,15 @@ function addon:OnInitialize()
         f.name:SetText(UnitFullName(f.unit))
     end)
 
+    hooksecurefunc('CompactUnitFrame_UpdateStatusText', function (f)
+        if not NIORO_DB.SETTINGS.USE_SHORT_PERC then return end
+        if not f.statusText or not f.statusText:IsShown() then return end
+        local text = f.statusText:GetText()
+        local isPrec = string.find(text, '%%')
+        if not isPrec then return end
+        f.statusText:SetText(string.gsub(text, '%%', ''))
+    end)
+
 end
 
 function addon:OnEnable()

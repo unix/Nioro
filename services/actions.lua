@@ -80,6 +80,12 @@ function Actions:toggleShortName(toggle)
     self:updateFrameOptions()
 end
 
+function Actions:toggleShortPerc(toggle)
+    NIORO_DB.SETTINGS.USE_SHORT_PERC = toggle
+    self:updateFrameOptions()
+end
+
+
 function Actions:setBuffScale(scale)
     NIORO_DB.SETTINGS.BUFF_SCALE = scale
     self:updateFrameOptions()

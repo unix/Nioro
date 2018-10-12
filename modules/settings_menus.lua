@@ -1,6 +1,6 @@
 local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
 local L = LibStub("AceLocale-3.0"):GetLocale('Nioro', false)
-local AceConfig, AceConfigDialog, AceGUI  = LibStub('AceConfig-3.0'), LibStub('AceConfigDialog-3.0'), LibStub('AceGUI-3.0')
+local infos = addon:GetModule('Constants'):GetInfos()
 local Menus = addon:NewModule('SettingsMenus')
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
@@ -32,7 +32,8 @@ local menus = {
                 width = 'full',
                 order = 3,
                 tristate = true,
-                get = function ()
+                get = function (info)
+                    info.options.args.base.args.baseSep1.name = format("|CFF00FFFF%s: |r", '\n\n[Nioro]')..'v'..infos.VERSION
                     return Utils:toboolean(NIORO_DB.SETTINGS.OPTIONS.displayRoleIcon)
                 end,
                 set = function (info, t)
@@ -93,6 +94,19 @@ local menus = {
                 end,
                 set = function (info, t)
                     Actions:toggleShortName(Utils:toboolean(t))
+                end,
+            },
+            baseShortPerc = {
+                name = '隐藏百分比符号 (当百分比显示生命值时)',
+                type = 'toggle',
+                width = 'full',
+                order = 8,
+                tristate = true,
+                get = function ()
+                    return Utils:toboolean(NIORO_DB.SETTINGS.USE_SHORT_PERC)
+                end,
+                set = function (info, t)
+                    Actions:toggleShortPerc(Utils:toboolean(t))
                 end,
             },
             baseSep1 = {
