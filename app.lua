@@ -5,13 +5,23 @@ local infos = addon:GetModule('Constants'):GetInfos()
 
 function addon:OnInitialize()
 
+    local playerFrame = nil
+    local f = CreateFrame('Frame')
+    f:RegisterEvent('GROUP_ROSTER_UPDATE')
+    f:SetScript('OnEvent', function (s, e, a, b)
+        if IsInRaid() then return end
+        if IsInGroup() then return end
+        NIORO_VARS.COMPACT_FRAME = {}
+        if playerFrame then 
+            NIORO_VARS.COMPACT_FRAME['player'] = playerFrame
+        end
+    end)
+
     hooksecurefunc('CompactUnitFrame_SetUnit', function (f, unit)
         if unit == nil then return end
-        if not UnitInParty('player') and not IsInRaid() then 
-            NIORO_VARS.COMPACT_FRAME = {}
-            collectgarbage('collect')
-        end
+        
         NIORO_VARS.COMPACT_FRAME[unit] = f
+        if unit == 'player' then playerFrame = f end
 
         if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
@@ -55,11 +65,11 @@ function addon:OnInitialize()
             f.name:SetText(UnitFullName(f.unit))
         end
 
-        if NIORO_DB.SETTINGS.FONT_NAME_SCALE then
-            local fontName, fontSize, fontFlags = f.name:GetFont()
-            f.name.defaultSize = f.name.defaultSize or fontSize
-            f.name:SetFont(fontName, f.name.defaultSize * NIORO_DB.SETTINGS.FONT_NAME_SCALE, fontFlags)
-        end
+        -- if NIORO_DB.SETTINGS.FONT_NAME_SCALE then
+        --     local fontName, fontSize, fontFlags = f.name:GetFont()
+        --     f.name.nioro_size = f.name.nioro_size or fontSize
+        --     f.name:SetFont(fontName, f.name.nioro_size * NIORO_DB.SETTINGS.FONT_NAME_SCALE, fontFlags)
+        -- end
     end)
 
     hooksecurefunc('CompactUnitFrame_UpdateStatusText', function (f)

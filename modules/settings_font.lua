@@ -20,21 +20,21 @@ local font = {
                 order = 1,
             },
             fontSep1 = separatorGenerator(2),
-            fontNameSize = {
-                name = L.SETTINGS_FONT_NAME_SIZE,
-                type = 'range',
-                width = 'full',
-                min = 0.5,
-                max = 3,
-                step = 0.1,
-                order = 3,
-                set = function (info, value)
-                    Actions:setFontNameScale(value)
-                end,
-                get = function ()
-                    return NIORO_DB.SETTINGS.FONT_NAME_SCALE
-                end
-            },
+            -- fontNameSize = {
+            --     name = L.SETTINGS_FONT_NAME_SIZE,
+            --     type = 'range',
+            --     width = 'full',
+            --     min = 0.5,
+            --     max = 3,
+            --     step = 0.1,
+            --     order = 3,
+            --     set = function (info, value)
+            --         Actions:setFontNameScale(value)
+            --     end,
+            --     get = function ()
+            --         return NIORO_DB.SETTINGS.FONT_NAME_SCALE
+            --     end
+            -- },
             fontSep2 = separatorGenerator(4),
             fontStatusSize = {
                 name = L.SETTINGS_FONT_STATUS_SIZE,
