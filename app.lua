@@ -1,8 +1,8 @@
 local L = LibStub("AceLocale-3.0"):GetLocale('Nioro', false)
 local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
+local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
-local infos = addon:GetModule('Constants'):GetInfos()
 
 function addon:OnInitialize()
     local playerFrame = nil
@@ -12,7 +12,7 @@ function addon:OnInitialize()
     f:SetScript('OnEvent', function (s, e, a, b)
         if IsInRaid() then return end
         if IsInGroup() then return end
-        
+
         NIORO_VARS.COMPACT_FRAME = {}
         if not playerFrame then return end
         NIORO_VARS.COMPACT_FRAME['player'] = playerFrame
