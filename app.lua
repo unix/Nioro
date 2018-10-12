@@ -3,9 +3,10 @@ local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
 local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
+local playerFrame = nil
+local initFailed = false
 
 function addon:OnInitialize()
-    local playerFrame = nil
     local f = CreateFrame('Frame')
     f:RegisterEvent('GROUP_ROSTER_UPDATE')
     -- clear all raid frames when player leave a team
@@ -21,7 +22,7 @@ function addon:OnInitialize()
     hooksecurefunc('CompactUnitFrame_SetUnit', function (f, unit)
         if not unit or not f then return end
         if not Utils:isRaidFrame(f) then return end
-        
+        print(f:GetName())
         NIORO_VARS.COMPACT_FRAME[unit] = f
         if unit == 'player' then playerFrame = f end
 
@@ -31,6 +32,11 @@ function addon:OnInitialize()
         end
         if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
             f:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
+        end
+
+        if initFailed then
+            Actions:updateFrameOptions()
+            initFailed = false
         end
     end)
 
@@ -122,5 +128,8 @@ function addon:OnInitialize()
 end
 
 function addon:OnEnable()
-    Actions:updateFrameOptions()
+    -- fix init frame in en-US
+    -- the raid frame may be delayed loading when player first login in en-US server
+    if playerFrame then return Actions:updateFrameOptions() end
+    initFailed = true
 end
