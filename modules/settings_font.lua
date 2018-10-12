@@ -10,18 +10,18 @@ end
 
 local font = {
     font = {
-        name = '字体调整',
+        name = L.SETTINGS_FONT_NAME,
         type = 'group',
         order = 2,
         args = {
             fontHander = {
-                name = '字体调整',
+                name = L.SETTINGS_FONT_HANDER,
                 type = 'header',
                 order = 1,
             },
             fontSep1 = separatorGenerator(2),
             fontNameSize = {
-                name = '姓名文字大小',
+                name = L.SETTINGS_FONT_NAME_SIZE,
                 type = 'range',
                 width = 'full',
                 min = 0.5,
@@ -29,7 +29,6 @@ local font = {
                 step = 0.1,
                 order = 3,
                 set = function (info, value)
-                    print(123, value)
                     Actions:setFontNameScale(value)
                 end,
                 get = function ()
@@ -38,7 +37,7 @@ local font = {
             },
             fontSep2 = separatorGenerator(4),
             fontStatusSize = {
-                name = '状态文字缩放',
+                name = L.SETTINGS_FONT_STATUS_SIZE,
                 type = 'range',
                 width = 'full',
                 min = 0.5,

@@ -15,11 +15,15 @@ L['SETTINGS_BASE_SHORT_PERC'] = '隐藏百分比符号 (当百分比显示生命
 L['SETTINGS_BASE_FLAT_TEXTURE'] = '扁平化显示生命值'
 L['SETTINGS_BASE_FLAT_ICON'] = '扁平化显示图标\n'
 
-L['SETTINGS_RESIZE_NAME'] = '大小调整'
-L['SETTINGS_RESIZE_HANDER'] = '大小调整'
+L['SETTINGS_RESIZE_NAME'] = '框架缩放'
+L['SETTINGS_RESIZE_HANDER'] = '框架缩放'
 L['SETTINGS_RESIZE_BUFF'] = 'Buff 大小调整'
 L['SETTINGS_RESIZE_DEBUFF'] = 'Debuff 大小调整'
 L['SETTINGS_RESIZE_FRAME'] = '缩放团队框架框体大小'
+L['SETTINGS_FONT_NAME'] = '字体调整'
+L['SETTINGS_FONT_HANDER'] = '字体调整'
+L['SETTINGS_FONT_NAME_SIZE'] = '姓名文字缩放'
+L['SETTINGS_FONT_STATUS_SIZE'] = '状态文字缩放'
 L['MIORO_RELOAD_CONFIRM'] = '[Nioro]: 改动此设置项需要重新加载 UI 界面，你确定吗 ?'
 L['SETTINGS_INFO_DESC'] = 'Nioro 能帮助你详细设定暴雪原生框架界面。使用前请确认团队框架已勾选使用。'
 
