@@ -14,9 +14,9 @@ Blizzard Raid frame enhancement. includes Big Buff / Flat style / hidden icon...
 
 #### Addon preview
 
-![preview1](http://static.wittsay.cc/wow/nioro/1.png)
+![preview1](http://static.wittsay.cc/wow/nioro/3.png)
 
 
-![preview2](http://static.wittsay.cc/wow/nioro/2.png)
+![preview2](http://static.wittsay.cc/wow/nioro/4.png)
 
 

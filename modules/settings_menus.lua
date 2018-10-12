@@ -1,6 +1,6 @@
 local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
 local L = LibStub("AceLocale-3.0"):GetLocale('Nioro', false)
-local AceConfig, AceConfigDialog, AceGUI  = LibStub('AceConfig-3.0'), LibStub('AceConfigDialog-3.0'), LibStub('AceGUI-3.0')
+local infos = addon:GetModule('Constants'):GetInfos()
 local Menus = addon:NewModule('SettingsMenus')
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
@@ -32,7 +32,8 @@ local menus = {
                 width = 'full',
                 order = 3,
                 tristate = true,
-                get = function ()
+                get = function (info)
+                    info.options.args.base.args.baseSep1.name = format("|CFF00FFFF%s: |r", '\n\n[Nioro]')..'v'..infos.VERSION
                     return Utils:toboolean(NIORO_DB.SETTINGS.OPTIONS.displayRoleIcon)
                 end,
                 set = function (info, t)
@@ -95,51 +96,29 @@ local menus = {
                     Actions:toggleShortName(Utils:toboolean(t))
                 end,
             },
+            baseShortPerc = {
+                name = L.SETTINGS_BASE_SHORT_PERC,
+                type = 'toggle',
+                width = 'full',
+                order = 8,
+                tristate = true,
+                get = function ()
+                    return Utils:toboolean(NIORO_DB.SETTINGS.USE_SHORT_PERC)
+                end,
+                set = function (info, t)
+                    Actions:toggleShortPerc(Utils:toboolean(t))
+                end,
+            },
             baseSep1 = {
                 name = '\n',
                 type = 'description',
                 order = 10,
             },
-            baseBuff = {
-                name = L.SETTINGS_BASE_FLAT_BUFF,
-                type = 'range',
-                width = 'full',
-                min = 0.5,
-                max = 3,
-                step = 0.2,
-                order = 11,
-                set = function (info, value)
-                    Actions:setBuffScale(value)
-                end,
-                get = function ()
-                    return NIORO_DB.SETTINGS.BUFF_SCALE
-                end
-            },
-            baseSep2 = {
-                name = '\n',
-                type = 'description',
-                order = 12,
-            },
-            baseDebuff = {
-                name = L.SETTINGS_BASE_FLAT_DEBUFF,
-                type = 'range',
-                width = 'full',
-                min = 0.5,
-                max = 3,
-                step = 0.2,
-                order = 13,
-                set = function (info, value)
-                    Actions:setDebuffScale(value)
-                end,
-                get = function ()
-                    return NIORO_DB.SETTINGS.DEBUFF_SCALE
-                end
-            },
         },
     },
 }
 
-function Menus:getMenus()
+function Menus:get()
     return menus
 end
 

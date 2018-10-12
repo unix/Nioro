@@ -32,10 +32,14 @@ function Actions:initSlash()
     end
 end
 
+function Actions:isEnableFrame()
+    local pass = Utils:tableLength(NIORO_VARS.COMPACT_FRAME) ~= 0
+    if not pass then self:log(L.NOT_FOUND_RAID_FRAME) end
+    return pass
+end
+
 function Actions:updateFrameOptions(options)
-    if Utils:tableLength(NIORO_VARS.COMPACT_FRAME) == 0 then
-        return self:log(L.NOT_FOUND_RAID_FRAME)
-    end
+    if not self:isEnableFrame() then return end
     if not options then options = DefaultCompactUnitFrameOptions end
 
     for k, v in pairs(NIORO_DB.SETTINGS.OPTIONS) do
@@ -72,6 +76,12 @@ function Actions:toggleShortName(toggle)
     self:updateFrameOptions()
 end
 
+function Actions:toggleShortPerc(toggle)
+    NIORO_DB.SETTINGS.USE_SHORT_PERC = toggle
+    self:updateFrameOptions()
+end
+
+
 function Actions:setBuffScale(scale)
     NIORO_DB.SETTINGS.BUFF_SCALE = scale
     self:updateFrameOptions()
@@ -82,5 +92,12 @@ function Actions:setDebuffScale(scale)
     self:updateFrameOptions()
 end
 
+function Actions:setFrameScale(scale)
+    NIORO_DB.SETTINGS.FRAME_SCALE = scale
+    if not self:isEnableFrame() then return end
 
+    for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
+        frame:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
+    end
+end
 

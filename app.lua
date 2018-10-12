@@ -10,10 +10,16 @@ function addon:OnInitialize()
         if unit == nil then return end
         if not UnitInParty('player') and not IsInRaid() then 
             NIORO_VARS.COMPACT_FRAME = {}
+            collectgarbage('collect')
         end
         NIORO_VARS.COMPACT_FRAME[unit] = f
+
+        if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
             f.healthBar:SetStatusBarTexture(infos.HEALTH_BAR_TEXTURE, 'BORDER')
+        end
+        if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
+            f:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
         end
     end)
 
@@ -47,6 +53,15 @@ function addon:OnInitialize()
         if not NIORO_DB.SETTINGS.USE_SHORT_NAME then return end
         if not f.name or not f.name:IsShown() then return end
         f.name:SetText(UnitFullName(f.unit))
+    end)
+
+    hooksecurefunc('CompactUnitFrame_UpdateStatusText', function (f)
+        if not NIORO_DB.SETTINGS.USE_SHORT_PERC then return end
+        if not f.statusText or not f.statusText:IsShown() then return end
+        local text = f.statusText:GetText()
+        local isPrec = string.find(text, '%%')
+        if not isPrec then return end
+        f.statusText:SetText(string.gsub(text, '%%', ''))
     end)
 
 end
