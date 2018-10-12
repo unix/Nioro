@@ -95,6 +95,30 @@ function addon:OnInitialize()
         end
     end)
 
+    hooksecurefunc('CompactUnitFrame_SetMaxBuffs', function (f)
+        if not f then return end
+        if not Utils:isRaidFrame(f) then return end
+        if NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX then
+            f.maxBuffs = NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX
+        end
+    end)
+
+    hooksecurefunc('CompactUnitFrame_SetMaxDebuffs', function (f)
+        if not f then return end
+        if not Utils:isRaidFrame(f) then return end
+        if NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX then
+            f.maxDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX
+        end
+    end)
+
+    hooksecurefunc('CompactUnitFrame_SetMaxDispelDebuffs', function (f)
+        if not f then return end
+        if not Utils:isRaidFrame(f) then return end
+        if NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX then
+            f.maxDispelDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX
+        end
+    end)
+
 end
 
 function addon:OnEnable()
