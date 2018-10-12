@@ -22,7 +22,7 @@ function addon:OnInitialize()
     hooksecurefunc('CompactUnitFrame_SetUnit', function (f, unit)
         if not unit or not f then return end
         if not Utils:isRaidFrame(f) then return end
-        print(f:GetName())
+        
         NIORO_VARS.COMPACT_FRAME[unit] = f
         if unit == 'player' then playerFrame = f end
 
