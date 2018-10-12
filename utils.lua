@@ -28,3 +28,11 @@ function Utils:isDefaultSetting(key, val)
     if NIORO_DB.DEFAULT_SETTINGS[key] == nil then return true end
     return NIORO_DB.DEFAULT_SETTINGS[key] == val
 end
+
+function Utils:isRaidFrame(f)
+    if not f then return false end
+    local name = f:GetName()
+    if not name then return false end
+    if not string.find(name, 'RaidFrame') then return false end
+    return true
+end
