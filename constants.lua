@@ -3,7 +3,7 @@ local Constants = addon:NewModule('Constants')
 
 local infos = {
     ADDON_BASE_NAME = 'Nioro',
-    VERSION = '0.2.0',
+    VERSION = '0.3.0',
     HEALTH_BAR_TEXTURE = 'Interface\\AddOns\\Nioro\\media\\Raid',
     ICON_DEFAULT_WIDTH = 17.7,
 }

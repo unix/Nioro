@@ -10,6 +10,7 @@ function addon:OnInitialize()
         if unit == nil then return end
         if not UnitInParty('player') and not IsInRaid() then 
             NIORO_VARS.COMPACT_FRAME = {}
+            collectgarbage('collect')
         end
         NIORO_VARS.COMPACT_FRAME[unit] = f
 

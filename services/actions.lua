@@ -51,10 +51,6 @@ function Actions:updateFrameOptions(options)
     end
 end
 
-function function_name( ... )
-    -- body
-end
-
 function Actions:toggleRoleIcon(toggle)
     NIORO_DB.SETTINGS.OPTIONS.displayRoleIcon = toggle
     self:updateFrameOptions()
