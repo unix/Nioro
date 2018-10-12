@@ -107,10 +107,6 @@ end
 
 function Actions:setFontNameScale(scale)
     NIORO_DB.SETTINGS.FONT_NAME_SCALE = scale
-    if not self:isEnableFrame() then return end
-
-    for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
-        CompactUnitFrame_UpdateName(frame)
-    end
+    self:updateFrameOptions()
 end
 
