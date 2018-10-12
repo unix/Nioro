@@ -1,6 +1,7 @@
 local L = LibStub("AceLocale-3.0"):GetLocale('Nioro', false)
 local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
 local Actions = addon:GetModule('Actions')
+local Utils = addon:GetModule('Utils')
 local infos = addon:GetModule('Constants'):GetInfos()
 local CompactUnitFrame
 
@@ -50,18 +51,36 @@ function addon:OnInitialize()
     end)
 
     hooksecurefunc('CompactUnitFrame_UpdateName', function (f)
-        if not NIORO_DB.SETTINGS.USE_SHORT_NAME then return end
         if not f.name or not f.name:IsShown() then return end
-        f.name:SetText(UnitFullName(f.unit))
+
+        if NIORO_DB.SETTINGS.USE_SHORT_NAME then
+            f.name:SetText(UnitFullName(f.unit))
+        end
+
+        if NIORO_DB.SETTINGS.FONT_NAME_SCALE then
+            local fontName, fontSize, fontFlags = f.name:GetFont()
+            f.name.defaultSize = f.name.defaultSize or fontSize
+            f.name:SetFont(fontName, f.name.defaultSize * NIORO_DB.SETTINGS.FONT_NAME_SCALE, fontFlags)
+        end
     end)
 
     hooksecurefunc('CompactUnitFrame_UpdateStatusText', function (f)
-        if not NIORO_DB.SETTINGS.USE_SHORT_PERC then return end
         if not f.statusText or not f.statusText:IsShown() then return end
-        local text = f.statusText:GetText()
-        local isPrec = string.find(text, '%%')
-        if not isPrec then return end
-        f.statusText:SetText(string.gsub(text, '%%', ''))
+
+        if NIORO_DB.SETTINGS.FONT_STATUS_SCALE  then
+            local fontName, _, fontFlags = f.statusText:GetFont()
+            local options = DefaultCompactUnitFrameSetupOptions
+            local comScale = min(options.height / infos.NATIVE_UNIT_FRAME_HEIGHT, options.width / infos.NATIVE_UNIT_FRAME_WIDTH)
+            local nextFontSize = infos.NATIVE_FONT_SIZE * comScale * NIORO_DB.SETTINGS.FONT_STATUS_SCALE
+            f.statusText:SetFont(fontName, nextFontSize, fontFlags)
+        end
+
+        if NIORO_DB.SETTINGS.USE_SHORT_PERC then
+            local text = f.statusText:GetText()
+            local isPrec = string.find(text, '%%')
+            if not isPrec then return end
+            f.statusText:SetText(string.gsub(text, '%%', ''))
+        end
     end)
 
 end
