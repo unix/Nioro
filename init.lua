@@ -3,7 +3,7 @@ local Init = addon:NewModule('Init')
 
 function Init:getDefaultSettings()
     return {
-        VERSION = 3,
+        VERSION = 4,
         BUFF_SCALE = 1,
         DEBUFF_SCALE = 1,
         FRAME_SCALE = 1,
