@@ -10,18 +10,18 @@ end
 
 local resize = {
     resize = {
-        name = '大小调整',
+        name = L.SETTINGS_RESIZE_NAME,
         type = 'group',
         order = 2,
         args = {
             resizeHander = {
-                name = '大小调整',
+                name = L.SETTINGS_RESIZE_HANDER,
                 type = 'header',
                 order = 1,
             },
             resizeDesc = separatorGenerator(2),
             resizeBuff = {
-                name = L.SETTINGS_BASE_FLAT_BUFF,
+                name = L.SETTINGS_RESIZE_BUFF,
                 type = 'range',
                 width = 'full',
                 min = 0.5,
@@ -37,7 +37,7 @@ local resize = {
             },
             resizeSep1 = separatorGenerator(4),
             resizeDebuff = {
-                name = L.SETTINGS_BASE_FLAT_DEBUFF,
+                name = L.SETTINGS_RESIZE_DEBUFF,
                 type = 'range',
                 width = 'full',
                 min = 0.5,
@@ -53,7 +53,7 @@ local resize = {
             },
             resizeSep2 = separatorGenerator(6),
             resizeFrame = {
-                name = '缩放框架框体大小',
+                name = L.SETTINGS_RESIZE_FRAME,
                 type = 'range',
                 width = 'full',
                 min = 0.5,

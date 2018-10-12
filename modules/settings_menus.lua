@@ -97,7 +97,7 @@ local menus = {
                 end,
             },
             baseShortPerc = {
-                name = '隐藏百分比符号 (当百分比显示生命值时)',
+                name = L.SETTINGS_BASE_SHORT_PERC,
                 type = 'toggle',
                 width = 'full',
                 order = 8,
