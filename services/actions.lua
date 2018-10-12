@@ -110,3 +110,15 @@ function Actions:setFontNameScale(scale)
     self:updateFrameOptions()
 end
 
+function Actions:setShowBuffNum(num)
+    NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX = num
+end
+
+function Actions:setShowDebuffNum(num)
+    NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX = num
+end
+
+function Actions:setShowDispelDebuffNum(num)
+    NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX = num
+end
+
