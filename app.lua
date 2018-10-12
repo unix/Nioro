@@ -12,8 +12,13 @@ function addon:OnInitialize()
             NIORO_VARS.COMPACT_FRAME = {}
         end
         NIORO_VARS.COMPACT_FRAME[unit] = f
+
+        if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
             f.healthBar:SetStatusBarTexture(infos.HEALTH_BAR_TEXTURE, 'BORDER')
+        end
+        if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
+            f:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
         end
     end)
 

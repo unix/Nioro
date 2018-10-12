@@ -2,6 +2,7 @@ local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
 local AceConfig, AceConfigDialog, AceGUI  = LibStub('AceConfig-3.0'), LibStub('AceConfigDialog-3.0'), LibStub('AceGUI-3.0')
 local Settings = addon:NewModule('Settings')
 local Menus = addon:GetModule('SettingsMenus')
+local Resize = addon:GetModule('SettingsResize')
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
 local options = {
@@ -9,9 +10,14 @@ local options = {
     args = {},
 }
 
-for k, v in pairs(Menus:getMenus()) do
+for k, v in pairs(Menus:get()) do
     options.args[k] = v
 end
+
+for k, v in pairs(Resize:get()) do
+    options.args[k] = v
+end
+
 
 function Settings:OnInitialize()
     local AceFrame = AceGUI:Create('Frame')

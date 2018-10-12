@@ -100,46 +100,11 @@ local menus = {
                 type = 'description',
                 order = 10,
             },
-            baseBuff = {
-                name = L.SETTINGS_BASE_FLAT_BUFF,
-                type = 'range',
-                width = 'full',
-                min = 0.5,
-                max = 3,
-                step = 0.2,
-                order = 11,
-                set = function (info, value)
-                    Actions:setBuffScale(value)
-                end,
-                get = function ()
-                    return NIORO_DB.SETTINGS.BUFF_SCALE
-                end
-            },
-            baseSep2 = {
-                name = '\n',
-                type = 'description',
-                order = 12,
-            },
-            baseDebuff = {
-                name = L.SETTINGS_BASE_FLAT_DEBUFF,
-                type = 'range',
-                width = 'full',
-                min = 0.5,
-                max = 3,
-                step = 0.2,
-                order = 13,
-                set = function (info, value)
-                    Actions:setDebuffScale(value)
-                end,
-                get = function ()
-                    return NIORO_DB.SETTINGS.DEBUFF_SCALE
-                end
-            },
         },
     },
 }
 
-function Menus:getMenus()
+function Menus:get()
     return menus
 end
 
