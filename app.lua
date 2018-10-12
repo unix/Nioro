@@ -12,6 +12,7 @@ function addon:OnInitialize()
     f:SetScript('OnEvent', function (s, e, a, b)
         if IsInRaid() then return end
         if IsInGroup() then return end
+        
         NIORO_VARS.COMPACT_FRAME = {}
         if not playerFrame then return end
         NIORO_VARS.COMPACT_FRAME['player'] = playerFrame
