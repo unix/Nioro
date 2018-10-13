@@ -25,7 +25,7 @@ local makeMenus = function (self)
                     type = 'header',
                     order = 1,
                 },
-                baseDesc = separatorGenerator(2),
+                -- baseDesc = separatorGenerator(2),
                 baseRole = {
                     name = L.SETTINGS_BASE_SHOWROLE,
                     type = 'toggle',
@@ -136,6 +136,21 @@ local makeMenus = function (self)
                         self:openConfirm()
                     end,
                 },
+                baseGroupName = {
+                    name = '隐藏小队名称 (仅在小队相连模式有效)',
+                    type = 'toggle',
+                    width = 'full',
+                    order = 13,
+                    tristate = true,
+                    get = function ()
+                        return Utils:toboolean(NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME)
+                    end,
+                    set = function (info, t)
+                        Actions:toggleGroupName(Utils:toboolean(t))
+                        self:openConfirm()
+                    end,
+                },
+                baseVersion = separatorGenerator(15),
                 baseVersion = separatorGenerator(15),
             },
         },
