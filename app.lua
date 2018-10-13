@@ -4,13 +4,22 @@ local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
 local playerFrame = nil
-local initFailed = false
+local tryReloadOptions = false
 
 function addon:OnInitialize()
+    -- set global options when db loaded,
+    -- else, reload each frame with manually.
+    if NIORO_DB then
+        Actions:setGlobalOptions()
+    else
+        tryReloadOptions = true
+    end
+
     local f = CreateFrame('Frame')
     f:RegisterEvent('GROUP_ROSTER_UPDATE')
     -- clear all raid frames when player leave a team
-    f:SetScript('OnEvent', function (s, e, a, b)
+    f:SetScript('OnEvent', function (s, e)
+        if e ~= 'GROUP_ROSTER_UPDATE' then return end
         if IsInRaid() then return end
         if IsInGroup() then return end
 
@@ -18,25 +27,31 @@ function addon:OnInitialize()
         if not playerFrame then return end
         NIORO_VARS.COMPACT_FRAME['player'] = playerFrame
     end)
+    local setTexture = function (frame)
+        if not NIORO_DB then return end
+        if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
+            frame.healthBar:SetStatusBarTexture(infos.HEALTH_BAR_TEXTURE, 'BORDER')
+        end
+        if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
+            frame:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
+        end
+    end
+
+    hooksecurefunc('DefaultCompactUnitFrameSetup', function (f)
+        setTexture(f)
+    end)
 
     hooksecurefunc('CompactUnitFrame_SetUnit', function (f, unit)
         if not unit or not f then return end
         if not Utils:isRaidFrame(f) then return end
-        
+
+        setTexture(f)
         NIORO_VARS.COMPACT_FRAME[unit] = f
         if unit == 'player' then playerFrame = f end
 
-        if not NIORO_DB then return end
-        if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
-            f.healthBar:SetStatusBarTexture(infos.HEALTH_BAR_TEXTURE, 'BORDER')
-        end
-        if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
-            f:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
-        end
-
-        if initFailed then
+        if tryReloadOptions then
             Actions:updateFrameOptions()
-            initFailed = false
+            tryReloadOptions = false
         end
     end)
 
@@ -130,6 +145,7 @@ end
 function addon:OnEnable()
     -- fix init frame in en-US
     -- the raid frame may be delayed loading when player first login in en-US server
-    if playerFrame then return Actions:updateFrameOptions() end
-    initFailed = true
+    if not tryReloadOptions then return end
+    Actions:updateFrameOptions()
+    tryReloadOptions = false
 end

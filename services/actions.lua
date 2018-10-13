@@ -8,6 +8,12 @@ function Actions:OnInitialize()
     self:initSlash()
 end
 
+function Actions:setGlobalOptions()
+    for k, v in pairs(NIORO_DB.SETTINGS.OPTIONS) do
+        DefaultCompactUnitFrameOptions = Utils:setState(DefaultCompactUnitFrameOptions, k, v)
+    end
+end
+
 function Actions:log(text)
     local prefix = format("|CFF00FFFF%s: |r", L.ADDON_SHOW_NAME)
     SendSystemMessage(prefix..text)
@@ -34,7 +40,7 @@ end
 
 function Actions:isEnableFrame()
     local pass = Utils:tableLength(NIORO_VARS.COMPACT_FRAME) ~= 0
-    if not pass then self:log(L.NOT_FOUND_RAID_FRAME) end
+    -- if not pass then self:log(L.NOT_FOUND_RAID_FRAME) end
     return pass
 end
 
