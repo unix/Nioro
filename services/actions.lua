@@ -97,6 +97,11 @@ function Actions:toggleDebuffTooltip(toggle)
     self:updateFrameOptions()
 end
 
+function Actions:toggleGroupName(toggle)
+    NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME = toggle
+    self:updateFrameOptions()
+end
+
 function Actions:setBuffScale(scale)
     NIORO_DB.SETTINGS.BUFF_SCALE = scale
     self:updateFrameOptions()

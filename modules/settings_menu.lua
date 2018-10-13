@@ -25,7 +25,7 @@ local makeMenus = function (self)
                     type = 'header',
                     order = 1,
                 },
-                baseDesc = separatorGenerator(2),
+                -- baseDesc = separatorGenerator(2),
                 baseRole = {
                     name = L.SETTINGS_BASE_SHOWROLE,
                     type = 'toggle',
@@ -133,6 +133,20 @@ local makeMenus = function (self)
                     end,
                     set = function (info, t)
                         Actions:toggleDebuffTooltip(Utils:toboolean(t))
+                        self:openConfirm()
+                    end,
+                },
+                baseGroupName = {
+                    name = L.SETTINGS_BASE_GROUP_NAME,
+                    type = 'toggle',
+                    width = 'full',
+                    order = 13,
+                    tristate = true,
+                    get = function ()
+                        return Utils:toboolean(NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME)
+                    end,
+                    set = function (info, t)
+                        Actions:toggleGroupName(Utils:toboolean(t))
                         self:openConfirm()
                     end,
                 },

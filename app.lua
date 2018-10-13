@@ -132,6 +132,21 @@ function addon:OnInitialize()
         end
     end)
 
+    hooksecurefunc('CompactRaidGroup_InitializeForGroup', function (f)
+        if not f then return end
+        if NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME then
+            f.title:Hide()
+        end
+    end)
+
+    hooksecurefunc('CompactPartyFrame_Generate', function ()
+        if not CompactPartyFrame then return end 
+        local title = CompactPartyFrame.title
+        if title and NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME then
+            title:Hide()
+        end
+    end)
+
 end
 
 function addon:OnEnable()
