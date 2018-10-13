@@ -137,7 +137,7 @@ local makeMenus = function (self)
                     end,
                 },
                 baseGroupName = {
-                    name = '隐藏小队名称 (仅在小队相连模式有效)',
+                    name = L.SETTINGS_BASE_GROUP_NAME,
                     type = 'toggle',
                     width = 'full',
                     order = 13,
@@ -150,7 +150,6 @@ local makeMenus = function (self)
                         self:openConfirm()
                     end,
                 },
-                baseVersion = separatorGenerator(15),
                 baseVersion = separatorGenerator(15),
             },
         },
