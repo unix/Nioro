@@ -3,7 +3,6 @@ local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
 local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
-local playerFrame = nil
 local tryReloadOptions = false
 
 function addon:OnInitialize()
@@ -15,18 +14,6 @@ function addon:OnInitialize()
         tryReloadOptions = true
     end
 
-    local f = CreateFrame('Frame')
-    f:RegisterEvent('GROUP_ROSTER_UPDATE')
-    -- clear all raid frames when player leave a team
-    f:SetScript('OnEvent', function (s, e)
-        if e ~= 'GROUP_ROSTER_UPDATE' then return end
-        if IsInRaid() then return end
-        if IsInGroup() then return end
-
-        NIORO_VARS.COMPACT_FRAME = {}
-        if not playerFrame then return end
-        NIORO_VARS.COMPACT_FRAME['player'] = playerFrame
-    end)
     local setTexture = function (frame)
         if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
@@ -47,7 +34,6 @@ function addon:OnInitialize()
 
         setTexture(f)
         NIORO_VARS.COMPACT_FRAME[unit] = f
-        if unit == 'player' then playerFrame = f end
 
         if tryReloadOptions then
             Actions:updateFrameOptions()
