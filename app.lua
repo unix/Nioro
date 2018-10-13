@@ -17,19 +17,34 @@ function addon:OnInitialize()
     local setTexture = function (frame)
         if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
-            frame.healthBar:SetStatusBarTexture(infos.HEALTH_BAR_TEXTURE, 'BORDER')
+            frame.healthBar:SetStatusBarTexture(.75, .75, .75)
         end
         if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
             frame:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
         end
     end
 
+    local f = CreateFrame('Frame')
+    f:RegisterEvent('GROUP_ROSTER_UPDATE')
+    f:SetScript('OnEvent', function (s, e)
+        if e ~= 'GROUP_ROSTER_UPDATE' then return end
+        local frames = {}
+        for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
+            if frame and frame:IsShown() then
+                frames[k] = frame
+            end
+        end
+        NIORO_VARS.COMPACT_FRAME = frames
+        frames = nil
+    end)
+
+
     hooksecurefunc('DefaultCompactUnitFrameSetup', function (f)
         setTexture(f)
     end)
 
     hooksecurefunc('CompactUnitFrame_SetUnit', function (f, unit)
-        if not unit or not f then return end
+        if not unit then return end
         if not Utils:isRaidFrame(f) then return end
 
         setTexture(f)
@@ -74,8 +89,8 @@ function addon:OnInitialize()
     end)
 
     hooksecurefunc('CompactUnitFrame_UpdateName', function (f)
-        if not f.name or not f.name:IsShown() then return end
         if not Utils:isRaidFrame(f) then return end
+        if not f.name or not f.name:IsShown() then return end
 
         if NIORO_DB.SETTINGS.USE_SHORT_NAME then
             f.name:SetText(UnitFullName(f.unit))
@@ -89,8 +104,8 @@ function addon:OnInitialize()
     end)
 
     hooksecurefunc('CompactUnitFrame_UpdateStatusText', function (f)
-        if not f.statusText or not f.statusText:IsShown() then return end
         if not Utils:isRaidFrame(f) then return end
+        if not f.statusText or not f.statusText:IsShown() then return end
 
         if NIORO_DB.SETTINGS.FONT_STATUS_SCALE  then
             local fontName, _, fontFlags = f.statusText:GetFont()
@@ -109,7 +124,6 @@ function addon:OnInitialize()
     end)
 
     hooksecurefunc('CompactUnitFrame_SetMaxBuffs', function (f)
-        if not f then return end
         if not Utils:isRaidFrame(f) then return end
         if NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX then
             f.maxBuffs = NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX
@@ -117,7 +131,6 @@ function addon:OnInitialize()
     end)
 
     hooksecurefunc('CompactUnitFrame_SetMaxDebuffs', function (f)
-        if not f then return end
         if not Utils:isRaidFrame(f) then return end
         if NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX then
             f.maxDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX
@@ -125,7 +138,6 @@ function addon:OnInitialize()
     end)
 
     hooksecurefunc('CompactUnitFrame_SetMaxDispelDebuffs', function (f)
-        if not f then return end
         if not Utils:isRaidFrame(f) then return end
         if NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX then
             f.maxDispelDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX
@@ -133,17 +145,14 @@ function addon:OnInitialize()
     end)
 
     hooksecurefunc('CompactRaidGroup_InitializeForGroup', function (f)
-        if not f then return end
-        if NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME then
+        if f and NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME then
             f.title:Hide()
         end
     end)
 
     hooksecurefunc('CompactPartyFrame_Generate', function ()
-        if not CompactPartyFrame then return end 
-        local title = CompactPartyFrame.title
-        if title and NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME then
-            title:Hide()
+        if CompactPartyFrame and CompactPartyFrame.title and NIORO_DB.SETTINGS.HIDDEN_GROUP_NAME then
+            CompactPartyFrame.title:Hide()
         end
     end)
 

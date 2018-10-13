@@ -3,11 +3,11 @@
 ## Title-zhCN: Nioro
 ## Notes: Blizzard Raid frame enhancement
 ## Notes-zhCN: 暴雪团队框架订制与增强
-## Version: 0.7.0
+## Version: 0.7.1
 ## SavedVariables: NIORO_VARS
 ## SavedVariablesPerCharacter: NIORO_DB
 ## LoadManagers: AddonLoader
-## OptionalDeps: Ace3
+## OptionalDeps: LibStub, Ace3, CallbackHandler-1.0, AceAddon-3.0, AceGUI-3.0, AceConfig-3.0, AceLocale-3.0
 ## X-License: MIT/X
 
 embeds.xml
