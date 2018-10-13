@@ -109,7 +109,7 @@ local makeMenus = function (self)
                 },
                 baseSep1 = separatorGenerator(10),
                 baseBuffTooltip = {
-                    name = '隐藏 BUFF 详情提示框',
+                    name = L.SETTINGS_BASE_BUFF_TOOLTIP,
                     type = 'toggle',
                     width = 'full',
                     order = 11,
@@ -123,7 +123,7 @@ local makeMenus = function (self)
                     end,
                 },
                 baseDebuffTooltip = {
-                    name = '隐藏 DEBUFF 详情提示框',
+                    name = L.SETTINGS_BASE_DEBUFF_TOOLTIP,
                     type = 'toggle',
                     width = 'full',
                     order = 12,
