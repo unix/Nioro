@@ -13,6 +13,8 @@ L['SETTINGS_BASE_SHORT_NAME'] = 'Short name'
 L['SETTINGS_BASE_SHORT_PERC'] = 'Hidden percentage sign: % (when displayed in perc mode)'
 L['SETTINGS_BASE_FLAT_TEXTURE'] = 'Show HP with flat style'
 L['SETTINGS_BASE_FLAT_ICON'] = 'Show icon with flat style\n'
+L['SETTINGS_BASE_BUFF_TOOLTIP'] = 'Hide BUFF tooltip'
+L['SETTINGS_BASE_DEBUFF_TOOLTIP'] = 'Hide DEBUFF tooltip'
 
 L['SETTINGS_RESIZE_NAME'] = 'Resize frame'
 L['SETTINGS_RESIZE_HANDER'] = 'Resize frame'

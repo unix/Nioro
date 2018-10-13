@@ -3,7 +3,7 @@ local Init = addon:NewModule('Init')
 
 function Init:getDefaultSettings()
     return {
-        VERSION = 4,
+        VERSION = 5,
         BUFF_SCALE = 1,
         DEBUFF_SCALE = 1,
         FRAME_SCALE = 1,
@@ -16,6 +16,8 @@ function Init:getDefaultSettings()
         USE_FLAT_ICON = true,
         USE_SHORT_NAME = true,
         USE_SHORT_PERC = false,
+        HIDDEN_BUFF_TOOLTIP = false,
+        HIDDEN_DEBUFF_TOOLTIP = false,
         OPTIONS = {
             displayName = true,
             displayRoleIcon = true,
