@@ -63,6 +63,9 @@ function addon:OnInitialize()
                 if NIORO_DB.SETTINGS.USE_FLAT_ICON then
                     buff.icon:SetTexCoord(0.07, 0.93, 0.07, 0.93)
                 end
+                if NIORO_DB.SETTINGS.HIDDEN_BUFF_TOOLTIP then
+                    buff:SetScript('OnEnter', function() end)
+                end
                 buff:SetScale(NIORO_DB.SETTINGS.BUFF_SCALE)
             end
         end
@@ -75,6 +78,9 @@ function addon:OnInitialize()
             if debuff and debuff.SetScale and debuff:IsShown() then 
                 if NIORO_DB.SETTINGS.USE_FLAT_ICON then
                     debuff.icon:SetTexCoord(0.07, 0.93, 0.07, 0.93)
+                end
+                if NIORO_DB.SETTINGS.HIDDEN_DEBUFF_TOOLTIP then
+                    debuff:SetScript('OnEnter', function() end)
                 end
                 debuff:SetScale(NIORO_DB.SETTINGS.DEBUFF_SCALE) 
             end

@@ -87,6 +87,16 @@ function Actions:toggleShortPerc(toggle)
     self:updateFrameOptions()
 end
 
+function Actions:toggleBuffTooltip(toggle)
+    NIORO_DB.SETTINGS.HIDDEN_BUFF_TOOLTIP = toggle
+    self:updateFrameOptions()
+end
+
+function Actions:toggleDebuffTooltip(toggle)
+    NIORO_DB.SETTINGS.HIDDEN_DEBUFF_TOOLTIP = toggle
+    self:updateFrameOptions()
+end
+
 function Actions:setBuffScale(scale)
     NIORO_DB.SETTINGS.BUFF_SCALE = scale
     self:updateFrameOptions()
