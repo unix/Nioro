@@ -34,7 +34,7 @@ local makeMenus = function (self)
                     tristate = true,
                     get = function (info)
                         info.options.args.base.args.baseVersion.name = format("|CFF00FFFF%s: |r", '\n\n[Nioro]')..'v'..infos.VERSION
-                        return Utils:toboolean(NIORO_DB.SETTINGS.OPTIONS.displayRoleIcon)
+                        return Utils:toboolean(NIORO_DB.SETTINGS.DISPLAY_ROLE_ICON)
                     end,
                     set = function (info, t)
                         Actions:toggleRoleIcon(Utils:toboolean(t))
@@ -47,7 +47,7 @@ local makeMenus = function (self)
                     order = 4,
                     tristate = true,
                     get = function ()
-                        return Utils:toboolean(NIORO_DB.SETTINGS.OPTIONS.displayName)
+                        return Utils:toboolean(NIORO_DB.SETTINGS.DISPLAY_NAME)
                     end,
                     set = function (info, t)
                         Actions:toggleMemberName(Utils:toboolean(t))
@@ -64,7 +64,6 @@ local makeMenus = function (self)
                     end,
                     set = function (info, t)
                         Actions:toggleFlatTexture(Utils:toboolean(t))
-                        self:openConfirm()
                     end,
                 },
                 baseFlatIcon = {
@@ -78,7 +77,6 @@ local makeMenus = function (self)
                     end,
                     set = function (info, t)
                         Actions:toggleFlatIcon(Utils:toboolean(t))
-                        self:openConfirm()
                     end,
                 },
                 baseShortName = {
@@ -119,7 +117,6 @@ local makeMenus = function (self)
                     end,
                     set = function (info, t)
                         Actions:toggleBuffTooltip(Utils:toboolean(t))
-                        self:openConfirm()
                     end,
                 },
                 baseDebuffTooltip = {
@@ -133,7 +130,6 @@ local makeMenus = function (self)
                     end,
                     set = function (info, t)
                         Actions:toggleDebuffTooltip(Utils:toboolean(t))
-                        self:openConfirm()
                     end,
                 },
                 baseGroupName = {
@@ -147,7 +143,6 @@ local makeMenus = function (self)
                     end,
                     set = function (info, t)
                         Actions:toggleGroupName(Utils:toboolean(t))
-                        self:openConfirm()
                     end,
                 },
                 baseVersion = separatorGenerator(15),
@@ -160,27 +155,6 @@ function Menus:get()
     return makeMenus(self)
 end
 
-function Menus:openConfirm()
-    PlaySound(SOUNDKIT.IG_MAINMENU_OPEN)
-    StaticPopup_Show('MIORO_RELOAD_CONFIRM')
-end
 
 function Menus:OnInitialize()
-    StaticPopupDialogs['MIORO_RELOAD_CONFIRM'] = {
-        text = L.MIORO_RELOAD_CONFIRM,
-        button1 = OKAY,
-        button2 = NO,
-        hideOnEscape = true,
-        timeout = 0,
-        exclusive = true,
-        showAlert = true,
-        OnAccept = function(self)
-            PlaySound(SOUNDKIT.IG_MAINMENU_CLOSE)
-            ReloadUI()
-        end,
-        OnCancel = function(self)
-            PlaySound(SOUNDKIT.IG_MAINMENU_CLOSE)
-            StaticPopup_Hide('MIORO_RELOAD_CONFIRM')
-        end,
-    }
 end

@@ -3,17 +3,16 @@ local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
 local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
-local tryReloadOptions = false
+
+-- local ef = CreateFrame('Frame')
+-- ef:RegisterEvent('ADDON_ACTION_BLOCKED')
+-- ef:RegisterEvent("ADDON_ACTION_FORBIDDEN")
+-- ef:SetScript('OnEvent', function (s, e, name, desc) 
+--     local type = (e == 'ADDON_ACTION_BLOCKED' and 'BLOCKED') or 'FORBIDDEN'
+--     print('Error '..type.. ':', name, desc)
+-- end)
 
 function addon:OnInitialize()
-    -- set global options when db loaded,
-    -- else, reload each frame with manually.
-    if NIORO_DB then
-        Actions:setGlobalOptions()
-    else
-        tryReloadOptions = true
-    end
-
     local setTexture = function (frame)
         if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
@@ -22,22 +21,13 @@ function addon:OnInitialize()
         if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
             frame:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
         end
-    end
 
-    local f = CreateFrame('Frame')
-    f:RegisterEvent('GROUP_ROSTER_UPDATE')
-    f:SetScript('OnEvent', function (s, e)
-        if e ~= 'GROUP_ROSTER_UPDATE' then return end
-        local frames = {}
-        for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
-            if frame and frame:IsShown() then
-                frames[k] = frame
-            end
+        if NIORO_DB.SETTINGS.BUFF_SHOW_GLOBAL_TOGGLE then
+            frame.maxBuffs = NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX
+            frame.maxDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX
+            frame.maxDispelDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX
         end
-        NIORO_VARS.COMPACT_FRAME = frames
-        frames = nil
-    end)
-
+    end
 
     hooksecurefunc('DefaultCompactUnitFrameSetup', function (f)
         setTexture(f)
@@ -46,14 +36,10 @@ function addon:OnInitialize()
     hooksecurefunc('CompactUnitFrame_SetUnit', function (f, unit)
         if not unit then return end
         if not Utils:isRaidFrame(f) then return end
+        if not f:IsShown() then return end
 
         setTexture(f)
         NIORO_VARS.COMPACT_FRAME[unit] = f
-
-        if tryReloadOptions then
-            Actions:updateFrameOptions()
-            tryReloadOptions = false
-        end
     end)
 
     hooksecurefunc('CompactUnitFrame_UpdateBuffs', function (f)
@@ -92,9 +78,17 @@ function addon:OnInitialize()
         if not Utils:isRaidFrame(f) then return end
         if not f.name or not f.name:IsShown() then return end
 
-        if NIORO_DB.SETTINGS.USE_SHORT_NAME then
-            f.name:SetText(UnitFullName(f.unit))
+        if not NIORO_DB.SETTINGS.DISPLAY_NAME or not ShouldShowName(f) then 
+            return f.name:SetText(' ')
         end
+
+        local name = (not NIORO_DB.SETTINGS.USE_SHORT_NAME and GetUnitName(f.unit, true)) or UnitFullName(f.unit)
+		if ( C_Commentator.IsSpectating() and name ) then
+			local overrideName = C_Commentator.GetPlayerOverrideName(name)
+			if overrideName then name = overrideName end
+		end
+
+        f.name:SetText(name)
 
         if NIORO_DB.SETTINGS.FONT_NAME_SCALE then
             local fontName, fontSize, fontFlags = f.name:GetFont()
@@ -115,32 +109,25 @@ function addon:OnInitialize()
             f.statusText:SetFont(fontName, nextFontSize, fontFlags)
         end
 
-        if NIORO_DB.SETTINGS.USE_SHORT_PERC then
-            local text = f.statusText:GetText()
-            local isPrec = string.find(text, '%%')
-            if not isPrec then return end
-            f.statusText:SetText(string.gsub(text, '%%', ''))
+        -- in PERC mode
+        if (f.optionTable.healthText == 'perc') and (UnitHealthMax(f.displayedUnit) > 0) then 
+            if NIORO_DB.SETTINGS.USE_SHORT_PERC then
+                local text = f.statusText:GetText()
+                f.statusText:SetText(string.gsub(text, '%%', ''))
+            end
         end
     end)
 
-    hooksecurefunc('CompactUnitFrame_SetMaxBuffs', function (f)
-        if not Utils:isRaidFrame(f) then return end
-        if NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX then
-            f.maxBuffs = NIORO_DB.SETTINGS.BUFF_SHOW_BUFF_MAX
-        end
-    end)
-
-    hooksecurefunc('CompactUnitFrame_SetMaxDebuffs', function (f)
-        if not Utils:isRaidFrame(f) then return end
-        if NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX then
-            f.maxDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DEBUFF_MAX
-        end
-    end)
-
-    hooksecurefunc('CompactUnitFrame_SetMaxDispelDebuffs', function (f)
-        if not Utils:isRaidFrame(f) then return end
-        if NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX then
-            f.maxDispelDebuffs = NIORO_DB.SETTINGS.BUFF_SHOW_DISPEL_DEBUFF_MAX
+    hooksecurefunc('CompactUnitFrame_UpdateRoleIcon', function (f)
+        if not f or not f.roleIcon then return end
+        local role = UnitGroupRolesAssigned(f.unit)
+        f.roleIcon.shouldShowRole = (f.roleIcon.shouldShowRole == nil and f.roleIcon:IsShown()) or f.roleIcon.shouldShowRole
+        if NIORO_DB.SETTINGS.DISPLAY_ROLE_ICON and f.roleIcon.shouldShowRole then
+            f.roleIcon:Show()
+            f.roleIcon:SetScale(1)
+        else
+            f.roleIcon:Hide()
+            f.roleIcon:SetScale(0.01)
         end
     end)
 
@@ -158,10 +145,3 @@ function addon:OnInitialize()
 
 end
 
-function addon:OnEnable()
-    -- fix init frame in en-US
-    -- the raid frame may be delayed loading when player first login in en-US server
-    if not tryReloadOptions then return end
-    Actions:updateFrameOptions()
-    tryReloadOptions = false
-end
