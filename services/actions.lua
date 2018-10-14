@@ -71,7 +71,6 @@ end
 function Actions:updateFramePart(fn)
     if not self:isEnableFrame() then return end
     local nextFrames = {}
-    print(Utils:tableLength(NIORO_VARS.COMPACT_FRAME))
     for k, frame in pairs(NIORO_VARS.COMPACT_FRAME) do
         if self:isExistsFrame(frame) then 
             nextFrames[k] = frame
@@ -79,7 +78,6 @@ function Actions:updateFramePart(fn)
         end
     end
     NIORO_VARS.COMPACT_FRAME = nextFrames
-    print(Utils:tableLength(NIORO_VARS.COMPACT_FRAME))
     nextFrames = nil
 end
 

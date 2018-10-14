@@ -4,13 +4,13 @@ local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
 
-local errorFrame = CreateFrame('Frame')
-errorFrame:RegisterEvent('ADDON_ACTION_BLOCKED')
-errorFrame:RegisterEvent("ADDON_ACTION_FORBIDDEN")
-errorFrame:SetScript('OnEvent', function (s, e, v, w) 
-    local type = (e == 'ADDON_ACTION_BLOCKED' and 'block') or 'forbidden'
-    print('error '..type.. ':', v, w)
-end)
+-- local ef = CreateFrame('Frame')
+-- ef:RegisterEvent('ADDON_ACTION_BLOCKED')
+-- ef:RegisterEvent("ADDON_ACTION_FORBIDDEN")
+-- ef:SetScript('OnEvent', function (s, e, name, desc) 
+--     local type = (e == 'ADDON_ACTION_BLOCKED' and 'BLOCKED') or 'FORBIDDEN'
+--     print('Error '..type.. ':', name, desc)
+-- end)
 
 function addon:OnInitialize()
     local setTexture = function (frame)
