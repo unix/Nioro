@@ -1,4 +1,5 @@
-local addon = LibStub('AceAddon-3.0'):NewAddon('Nioro')
+local addonName = GetAddOnMetadata(..., 'Title')
+local addon = LibStub('AceAddon-3.0'):NewAddon(addonName)
 local Init = addon:NewModule('Init')
 
 function Init:getDefaultSettings()

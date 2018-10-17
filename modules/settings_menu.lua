@@ -1,5 +1,6 @@
-local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
-local L = LibStub("AceLocale-3.0"):GetLocale('Nioro', false)
+local addonName = GetAddOnMetadata(..., 'Title')
+local addon = LibStub('AceAddon-3.0'):GetAddon(addonName)
+local L = LibStub("AceLocale-3.0"):GetLocale(addonName, false)
 local infos = addon:GetModule('Constants'):GetInfos()
 local Menus = addon:NewModule('SettingsMenus')
 local Actions = addon:GetModule('Actions')

@@ -1,4 +1,5 @@
-local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
+local addonName = GetAddOnMetadata(..., 'Title')
+local addon = LibStub('AceAddon-3.0'):GetAddon(addonName)
 local AceConfig, AceConfigDialog, AceGUI  = LibStub('AceConfig-3.0'), LibStub('AceConfigDialog-3.0'), LibStub('AceGUI-3.0')
 local Settings = addon:NewModule('Settings')
 local Menus = addon:GetModule('SettingsMenus')
