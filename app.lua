@@ -4,22 +4,19 @@ local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
 
--- local ef = CreateFrame('Frame')
--- ef:RegisterEvent('ADDON_ACTION_BLOCKED')
--- ef:RegisterEvent("ADDON_ACTION_FORBIDDEN")
--- ef:SetScript('OnEvent', function (s, e, name, desc) 
---     local type = (e == 'ADDON_ACTION_BLOCKED' and 'BLOCKED') or 'FORBIDDEN'
---     print('Error '..type.. ':', name, desc)
--- end)
+local ef = CreateFrame('Frame')
+ef:RegisterEvent('ADDON_ACTION_BLOCKED')
+ef:RegisterEvent("ADDON_ACTION_FORBIDDEN")
+ef:SetScript('OnEvent', function (s, e, name, desc) 
+    local type = (e == 'ADDON_ACTION_BLOCKED' and 'BLOCKED') or 'FORBIDDEN'
+    print('Error '..type.. ':', name, desc)
+end)
 
 function addon:OnInitialize()
     local setTexture = function (frame)
         if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
             frame.healthBar:SetStatusBarTexture(.75, .75, .75)
-        end
-        if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
-            frame:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
         end
 
         if NIORO_DB.SETTINGS.BUFF_SHOW_GLOBAL_TOGGLE then
@@ -142,6 +139,9 @@ function addon:OnInitialize()
             CompactPartyFrame.title:Hide()
         end
     end)
-
+    
 end
 
+function addon:OnEnable()
+    Actions:updateCompactRaidFrameScale()
+end
