@@ -1,4 +1,5 @@
-local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
+local addonName = GetAddOnMetadata(..., 'Title')
+local addon = LibStub('AceAddon-3.0'):GetAddon(addonName)
 local Utils = addon:NewModule('Utils')
 
 function Utils:toboolean(t)

@@ -1,5 +1,6 @@
-local L = LibStub("AceLocale-3.0"):GetLocale('Nioro', false)
-local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
+local addonName = GetAddOnMetadata(..., 'Title')
+local L = LibStub("AceLocale-3.0"):GetLocale(addonName, false)
+local addon = LibStub('AceAddon-3.0'):GetAddon(addonName)
 local infos = addon:GetModule('Constants'):GetInfos()
 local Actions = addon:GetModule('Actions')
 local Utils = addon:GetModule('Utils')
@@ -17,9 +18,6 @@ function addon:OnInitialize()
         if not NIORO_DB then return end
         if NIORO_DB.SETTINGS.USE_FLAT_TEXTURE then
             frame.healthBar:SetStatusBarTexture(.75, .75, .75)
-        end
-        if NIORO_DB.SETTINGS.FRAME_SCALE ~= 1 then
-            frame:SetScale(NIORO_DB.SETTINGS.FRAME_SCALE)
         end
 
         if NIORO_DB.SETTINGS.BUFF_SHOW_GLOBAL_TOGGLE then
@@ -142,6 +140,9 @@ function addon:OnInitialize()
             CompactPartyFrame.title:Hide()
         end
     end)
-
+    
 end
 
+function addon:OnEnable()
+    Actions:updateCompactRaidFrameScale()
+end

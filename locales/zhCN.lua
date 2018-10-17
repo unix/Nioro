@@ -1,5 +1,6 @@
-local addon = LibStub('AceAddon-3.0'):GetAddon('Nioro')
-local L = LibStub("AceLocale-3.0"):NewLocale('Nioro', "zhCN", false)
+local addonName = GetAddOnMetadata(..., 'Title')
+local addon = LibStub('AceAddon-3.0'):GetAddon(addonName)
+local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "zhCN", false)
 if not L then return end
 
 L['ADDON_SHOW_NAME'] = 'Nioro'
