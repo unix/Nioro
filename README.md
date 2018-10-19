@@ -3,7 +3,7 @@ Blizzard Raid frame enhancement. includes Big Buff / Flat style / hidden icon...
 
 
 #### Setting
-- enter '/nioro show' to open setting planel.
+- enter '/nioro' to open setting planel.
 
 
 
