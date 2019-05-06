@@ -18,5 +18,6 @@ utils.lua
 
 locales\enUS.lua
 locales\zhCN.lua
+locales\zhTW.lua
 
 app.xml
