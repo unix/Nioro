@@ -17,7 +17,7 @@ L['SETTINGS_BASE_FLAT_TEXTURE'] = '生命值材質扁平化'
 L['SETTINGS_BASE_FLAT_ICON'] = '光環圖示扁平化'
 L['SETTINGS_BASE_BUFF_TOOLTIP'] = '隱藏增益光環的提示框'
 L['SETTINGS_BASE_DEBUFF_TOOLTIP'] = '隱藏減益光環的提示框'
-L['SETTINGS_BASE_GROUP_NAME'] = '隱藏小隊相連模式的小隊名稱'
+L['SETTINGS_BASE_GROUP_NAME'] = '隱藏小隊相連模式的小隊編號'
 
 L['SETTINGS_RESIZE_NAME'] = '縮放調整'
 L['SETTINGS_RESIZE_HANDER'] = '縮放調整'
