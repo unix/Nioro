@@ -40,7 +40,7 @@ function addon:OnInitialize()
         NIORO_VARS.COMPACT_FRAME[unit] = f
     end)
 
-    hooksecurefunc('CompactUnitFrame_UpdateBuffs', function (f)
+    hooksecurefunc('CompactUnitFrame_UpdateAuras', function (f)
         if not f.buffFrames then return end
         for i = 1, #f.buffFrames do
             local buff = f.buffFrames[i]
@@ -56,7 +56,7 @@ function addon:OnInitialize()
         end
     end)
 
-    hooksecurefunc('CompactUnitFrame_UpdateDebuffs', function (f)
+    hooksecurefunc('CompactUnitFrame_UpdateAuras', function (f)
         if not f.debuffFrames then return end
         for i = 1, #f.debuffFrames do
             local debuff = f.debuffFrames[i]

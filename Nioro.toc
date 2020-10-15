@@ -1,9 +1,9 @@
-## Interface: 80300
+## Interface: 90001
 ## Title: Nioro
 ## Title-zhCN: Nioro
 ## Notes: Blizzard Raid frame enhancement
 ## Notes-zhCN: 暴雪团队框架订制与增强
-## Version: 0.9.0
+## Version: @project-version@
 ## SavedVariables: NIORO_VARS
 ## SavedVariablesPerCharacter: NIORO_DB
 ## LoadManagers: AddonLoader
