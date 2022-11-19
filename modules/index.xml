@@ -1,0 +1,8 @@
+<Ui xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="settings_menu.lua" />
+	<Script file="settings_resize.lua" />
+	<Script file="settings_font.lua" />
+	<Script file="settings_buff.lua" />
+	<Script file="settings.lua" />
+</Ui>
