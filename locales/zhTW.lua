@@ -1,7 +1,9 @@
 local addonName = GetAddOnMetadata(..., 'Title')
 local addon = LibStub('AceAddon-3.0'):GetAddon(addonName)
 local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "zhTW", false)
-if not L then return end
+if not L then
+  return
+end
 
 L['ADDON_SHOW_NAME'] = 'Nioro'
 L['SLASH_TIPS_SHOW'] = '顯示設定界面'
@@ -23,7 +25,8 @@ L['SETTINGS_RESIZE_NAME'] = '縮放調整'
 L['SETTINGS_RESIZE_HANDER'] = '縮放調整'
 L['SETTINGS_RESIZE_BUFF'] = '增益光環縮放'
 L['SETTINGS_RESIZE_DEBUFF'] = '減益光環縮放'
-L['SETTINGS_RESIZE_FRAME'] = '團隊框架縮放'
+L['SETTINGS_RESIZE_PARTY_FRAME'] = '隊伍框架縮放'
+L['SETTINGS_RESIZE_RAID_FRAME'] = '團隊框架縮放'
 L['SETTINGS_FONT_NAME'] = '字型調整'
 L['SETTINGS_FONT_HANDER'] = '字型調整'
 L['SETTINGS_FONT_NAME_SIZE'] = '姓名文字縮放'

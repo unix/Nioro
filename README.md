@@ -1,6 +1,6 @@
 ## Nioro
 
-Blizzard Raid frame enhancement. includes Big Buff / Flat style / hidden icon...
+Blizzard Raid frame enhancement. includes Big Buff / Flat style / hidden icons.
 
 ### Usage
 
@@ -10,7 +10,7 @@ Blizzard Raid frame enhancement. includes Big Buff / Flat style / hidden icon...
 
 ### Setting
 
-- Enter `/nioro` to open setting panel.
+- Enter `/nio` to open setting panel.
 - Or Press `ESC` -> `Configs` -> `AddOns`
 
 ### License

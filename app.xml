@@ -2,5 +2,5 @@
 ..\FrameXML\UI.xsd">
   <Include file="services\index.xml"/>
   <Include file="modules\index.xml"/>
-  <Script file="app.lua" />
+  <Script file="app.lua"/>
 </Ui>
