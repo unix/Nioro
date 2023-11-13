@@ -1,5 +1,7 @@
 ## Nioro
 
+![wow-v10.2.0](https://img.shields.io/badge/wow-v10.2.0-8A2BE2)
+
 Blizzard Raid frame enhancement. includes Big Buff / Flat style / hidden icons.
 
 ### Usage
